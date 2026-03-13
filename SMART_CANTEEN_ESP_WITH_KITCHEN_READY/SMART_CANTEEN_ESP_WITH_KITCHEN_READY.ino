@@ -194,7 +194,7 @@ tr:hover{background:#f8f9ff}
 <div class="hd"><div style="display:flex;justify-content:space-between;align-items:center"><div><h1 style="text-align:left">&#127860; Smart Canteen</h1><span>Management System</span></div><button class="b br" onclick="doLogout()" style="padding:8px 16px">&#128682; Logout</button></div><div style="margin-top:8px;padding:6px 10px;background:rgba(255,255,255,.2);border-radius:6px;font-size:12px">&#127760; IP: <b id="ipaddr">--</b> (Bookmark this!)</div></div>
 <div class="tabs"><button class="t a" onclick="sw(0)">&#128202; Dashboard</button><button class="t" onclick="sw(1)">&#128100; Users</button><button class="t" onclick="sw(2)">&#127828; Menu</button><button class="t" onclick="sw(3)">&#128293; Kitchen</button><button class="t" onclick="sw(4)">&#128200; Reports</button></div>
 <div id="p0" class="p a"><div id="lockBanner" style="display:none;background:linear-gradient(135deg,#ff6b6b,#ee5a5a);color:#fff;padding:14px;border-radius:10px;margin-bottom:12px;text-align:center"><b>&#128274; SYSTEM LOCKED</b><br><span id="lockMsg">System Closed</span></div><div style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:12px 16px;border-radius:10px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center"><div><b id="cdate">--</b></div><div style="font-size:1.5em;font-weight:bold" id="ctime">--:--:--</div></div><div class="stats"><div class="stat"><b id="tu">0</b><span>Users</span></div><div class="stat"><b id="tm">0</b><span>Menu Items</span></div><div class="stat"><b id="to">0</b><span>Pending</span></div><div class="stat"><b id="on">0</b><span>Online</span></div><div class="stat" id="sas"><b id="sa">0</b><span>Low Stock</span></div></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="b by" onclick="rf()">&#8635; Refresh</button><button id="lockBtn" class="b bg" onclick="toggleLock()">&#128275; Unlock</button></div></div>
-<div id="p1" class="p"><div style="background:#fff;padding:20px;border-radius:12px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.15)"><h3 style="color:#667eea;margin:0 0 16px 0">&#128179; Add New User</h3><input id="suid" placeholder="Card UID (scan or type)" style="margin-bottom:10px;padding:12px;font-size:15px"><input id="sname" placeholder="Full Name" style="margin-bottom:10px;padding:12px;font-size:15px"><input id="sbal" placeholder="Balance (Rs)" type="number" value="0" style="margin-bottom:10px;padding:12px;font-size:15px"><input id="scl" placeholder="Credit Limit (Rs)" type="number" value="0" style="margin-bottom:16px;padding:12px;font-size:15px"><div style="background:linear-gradient(135deg,#56ab2f,#a8e063);padding:18px;border-radius:10px;text-align:center;cursor:pointer;box-shadow:0 4px 15px rgba(86,171,47,.4)" onclick="addScanned()"><span style="color:#fff;font-size:20px;font-weight:bold">&#10004; SUBMIT - ADD USER</span></div><div style="margin-top:14px;padding-top:14px;border-top:1px solid #eee;text-align:center"><button class="b bp" onclick="startScan()" style="padding:10px 24px">&#128179; Scan RFID Card</button><span id="scanStatus" style="margin-left:10px;padding:6px 12px;border-radius:6px;background:#f0f0f0;font-size:13px">Ready</span></div></div><button class="b bg" onclick="sm('au')">+ Add Manually</button><button class="b bb" onclick="dlU('csv')">&#128196; CSV</button><button class="b bk" onclick="dlU('txt')">&#128196; TXT</button><table><thead><tr><th>UID</th><th>Name</th><th>Balance</th><th>Credit</th><th>Actions</th></tr></thead><tbody id="ut"></tbody></table></div>
+<div id="p1" class="p"><div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px"><div style="flex:1;min-width:280px;background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.15)"><h3 style="color:#667eea;margin:0 0 16px 0">&#128179; Add New User</h3><input id="suid" placeholder="Card UID (scan or type)" style="margin-bottom:10px;padding:12px;font-size:15px"><input id="sname" placeholder="Full Name" style="margin-bottom:10px;padding:12px;font-size:15px"><input id="sbal" placeholder="Balance (Rs)" type="number" value="0" style="margin-bottom:10px;padding:12px;font-size:15px"><input id="scl" placeholder="Credit Limit (Rs)" type="number" value="0" style="margin-bottom:16px;padding:12px;font-size:15px"><div style="background:linear-gradient(135deg,#56ab2f,#a8e063);padding:18px;border-radius:10px;text-align:center;cursor:pointer;box-shadow:0 4px 15px rgba(86,171,47,.4)" onclick="addScanned()"><span style="color:#fff;font-size:20px;font-weight:bold">&#10004; SUBMIT - ADD USER</span></div><div style="margin-top:14px;padding-top:14px;border-top:1px solid #eee;text-align:center"><button class="b bp" onclick="startScan()" style="padding:10px 24px">&#128179; Scan RFID Card</button><span id="scanStatus" style="margin-left:10px;padding:6px 12px;border-radius:6px;background:#f0f0f0;font-size:13px">Ready</span></div></div><div style="flex:1;min-width:280px;background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.15)"><h3 style="color:#0083b0;margin:0 0 16px 0">&#128176; Recharge User</h3><input id="ruid" placeholder="Existing User UID" style="margin-bottom:10px;padding:12px;font-size:15px"><input id="ramt" placeholder="Recharge Amount (Rs)" type="number" min="1" step="1" style="margin-bottom:16px;padding:12px;font-size:15px"><div style="background:linear-gradient(135deg,#00b4db,#0083b0);padding:18px;border-radius:10px;text-align:center;cursor:pointer;box-shadow:0 4px 15px rgba(0,131,176,.35)" onclick="rechargeUser()"><span style="color:#fff;font-size:20px;font-weight:bold">+ RECHARGE BALANCE</span></div><div style="margin-top:14px;padding-top:14px;border-top:1px solid #eee;text-align:center"><button class="b bb" onclick="startRechargeScan()" style="padding:10px 24px">&#128179; Scan User Card</button><span id="rechargeStatus" style="margin-left:10px;padding:6px 12px;border-radius:6px;background:#f0f0f0;font-size:13px">Ready</span></div></div></div><button class="b bg" onclick="sm('au')">+ Add Manually</button><button class="b bb" onclick="dlU('csv')">&#128196; CSV</button><button class="b bk" onclick="dlU('txt')">&#128196; TXT</button><table><thead><tr><th>UID</th><th>Name</th><th>Balance</th><th>Credit</th><th>Actions</th></tr></thead><tbody id="ut"></tbody></table></div>
 <div id="p2" class="p"><button class="b bg" onclick="sm('am')">+ Add Item</button><button class="b bb" onclick="dlM('csv')">&#128196; CSV</button><button class="b bk" onclick="dlM('txt')">&#128196; TXT</button><table><thead><tr><th>Key</th><th>Name</th><th>Price</th><th>Stock</th><th>Actions</th></tr></thead><tbody id="mt"></tbody></table></div>
 <div id="p3" class="p"><button class="b bp" onclick="lo()">&#8635; Refresh</button><button class="b bb" onclick="dlO('csv')">&#128196; CSV</button><button class="b bk" onclick="dlO('txt')">&#128196; TXT</button><div id="sal"></div><div id="ol"></div></div>
 <div id="p4" class="p"><div class="stats"><div class="stat"><b id="ts">&#8377;0</b><span>Total Sales</span></div><div class="stat"><b id="tord">0</b><span>Total Orders</span></div><div class="stat"><b id="trch">&#8377;0</b><span>Recharges</span></div></div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px"><button class="b bp" onclick="lrp()">&#8635; Refresh</button><button class="b bb" onclick="dlRp('sales')">&#128200; Sales</button><button class="b bg" onclick="dlRp('inv')">&#128230; Inventory</button><button class="b by" onclick="dlRp('user')">&#128100; Users</button></div><div style="display:flex;gap:12px;flex-wrap:wrap"><div style="flex:1;min-width:280px"><b>&#128200; Sales Analytics</b><div id="sc" style="margin-top:8px"></div></div><div style="flex:1;min-width:280px"><b>&#127942; Top Items</b><div id="ti" style="margin-top:8px"></div></div></div><div style="margin-top:14px"><b>&#128179; Transaction History</b><table><thead><tr><th>Time</th><th>Type</th><th>User</th><th>Amount</th><th>Order#</th></tr></thead><tbody id="txl"></tbody></table></div><div style="margin-top:14px"><b>&#128100; User Activity</b><div id="ua" style="margin-top:8px"></div></div></div>
@@ -214,25 +214,32 @@ function hm(i){$(i).className='m'}
 function rf(){lu();lm();lo();lsa();gls()}
 function gls(){fetch('/api/system/status').then(r=>r.json()).then(d=>{isLocked=d.locked;$('lockBanner').style.display=d.locked?'block':'none';$('lockMsg').textContent=d.message||'System Closed';$('lockBtn').innerHTML=d.locked?'&#128275; Unlock System':'&#128274; Lock System';$('lockBtn').className=d.locked?'b bg':'b br'})}
 function toggleLock(){if(isLocked){fetch('/api/system/unlock',{method:'POST'}).then(()=>gls())}else{var msg=prompt('Lock message (optional):','Canteen Closed');if(msg!==null)fetch('/api/system/lock',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg||'System Closed'})}).then(()=>gls())}}
-function lu(){fetch('/api/users').then(r=>r.json()).then(d=>{U=d;var h='';d.forEach((u,i)=>{h+='<tr><td><code>'+u.uid+'</code></td><td><b>'+u.name+'</b></td><td>&#8377;'+u.balance.toFixed(0)+'</td><td>&#8377;'+u.creditLimit.toFixed(0)+'</td><td><button class="b by" onclick="edU('+i+')">&#9998;</button><button class="b bg" onclick="rch('+i+')">+&#8377;</button><button class="b br" onclick="delU('+i+')">&#128465;</button></td></tr>'});$('ut').innerHTML=h;$('tu').textContent=d.length;$('on').textContent=d.filter(x=>x.online).length})}
+function lu(){fetch('/api/users').then(r=>r.json()).then(d=>{U=d;var h='';d.forEach((u,i)=>{h+='<tr><td><code>'+u.uid+'</code></td><td><b>'+u.name+'</b></td><td>&#8377;'+u.balance.toFixed(0)+'</td><td>&#8377;'+u.creditLimit.toFixed(0)+'</td><td><button class="b by" onclick="edU('+i+')">&#9998;</button><button class="b br" onclick="delU('+i+')">&#128465;</button></td></tr>'});$('ut').innerHTML=h;$('tu').textContent=d.length;$('on').textContent=d.filter(x=>x.online).length})}
 function sb(s){if(s==0)return'<span style="background:#6c757d;color:#fff;padding:2px 8px;border-radius:10px;font-size:11px">&#10060; OUT</span>';if(s<10)return'<span style="background:linear-gradient(135deg,#eb3349,#f45c43);color:#fff;padding:2px 8px;border-radius:10px;font-size:11px">&#128308; '+s+'</span>';if(s<25)return'<span style="background:linear-gradient(135deg,#f7971e,#ffd200);color:#333;padding:2px 8px;border-radius:10px;font-size:11px">&#128993; '+s+'</span>';return'<span style="background:linear-gradient(135deg,#56ab2f,#a8e063);color:#fff;padding:2px 8px;border-radius:10px;font-size:11px">&#128994; '+s+'</span>'}
 function lm(){fetch('/api/menu').then(r=>r.json()).then(d=>{M=d;var h='';d.forEach((m,i)=>{h+='<tr><td><code>'+m.key+'</code></td><td><b>'+m.name+'</b></td><td>&#8377;'+m.price.toFixed(0)+'</td><td>'+sb(m.stock)+'</td><td><button class="b by" onclick="edM('+i+')">&#9998;</button><button class="b br" onclick="delM('+i+')">&#128465;</button></td></tr>'});$('mt').innerHTML=h;$('tm').textContent=d.length})}
 function lo(){fetch('/api/orders').then(r=>r.json()).then(d=>{O=d;var h='',p=0;d.forEach(o=>{if(o.status=='pending')p++;var cls=o.status=='ready'?'o r':o.status=='cancelled'?'o c':'o';h+='<div class="'+cls+'"><b>&#127915; #'+o.id+'</b> - <b>'+o.userName+'</b><span class="st s'+o.status[0]+'">'+o.status.toUpperCase()+'</span><br><span style="font-size:11px;color:#666">&#128337; '+(o.time||'--')+'</span><br>';o.items.forEach(it=>{h+='&#8226; '+it.name+' &times;'+it.qty+'<br>'});h+='<b>&#8377; '+o.total.toFixed(0)+'</b>';if(o.status=='pending')h+='<div style="display:flex;gap:8px;margin-top:12px"><div style="flex:1;background:linear-gradient(135deg,#56ab2f,#a8e063);padding:14px;border-radius:8px;text-align:center;cursor:pointer;color:#fff;font-weight:bold;font-size:16px" onclick="rdy('+o.id+')">&#10004; READY</div><div style="flex:1;background:linear-gradient(135deg,#eb3349,#f45c43);padding:14px;border-radius:8px;text-align:center;cursor:pointer;color:#fff;font-weight:bold;font-size:16px" onclick="cnl('+o.id+')">&#10006; CANCEL</div></div>';h+='</div>'});$('ol').innerHTML=h||'<div style="text-align:center;padding:30px;color:#888">&#127860; No orders yet</div>';$('to').textContent=p});lsa()}
 function lsa(){fetch('/api/stock-alerts').then(r=>r.json()).then(d=>{SA=d;var h='',c=0;d.forEach((a,i)=>{if(!a.ack){c++;h+='<div style="background:linear-gradient(135deg,#fff5f5,#ffe0e0);border-left:4px solid #eb3349;padding:12px;margin:8px 0;border-radius:8px;display:flex;justify-content:space-between;align-items:center"><div><b style="color:#eb3349">&#9888; LOW STOCK</b><br><b>['+a.key+']</b> '+a.name+' - Only <b style="color:#eb3349">'+a.stock+'</b> left!</div><button class="b by" onclick="ackSA(\''+a.key+'\')" style="white-space:nowrap">&#10004; Acknowledge</button></div>'}});$('sal').innerHTML=h;$('sa').textContent=c;$('sas').style.background=c>0?'linear-gradient(135deg,#ffe0e0,#ffcccc)':'';if(c>0&&'speechSynthesis'in window){var u=new SpeechSynthesisUtterance('Warning: '+c+' items running low on stock');speechSynthesis.speak(u)}})}
 function ackSA(k){fetch('/api/stock-alerts/'+k+'/ack',{method:'POST'}).then(()=>lsa())}
-function addU(){var d={uid:$('nuid').value,name:$('nname').value,balance:+$('nbal').value,creditLimit:+$('ncl').value};fetch('/api/users',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).then(()=>{hm('au');lu()})}
+function reqJson(u,o){return fetch(u,o).then(r=>r.text().then(t=>{var d={};try{d=t?JSON.parse(t):{}}catch(e){}if(!r.ok||(d&&d.error))throw new Error((d&&d.error)||'Request failed');return d}))}
+function userExists(uid){uid=(uid||'').trim();return U.some(u=>u.uid===uid)}
+function setStatus(id,text,color){$(id).textContent=text;$(id).style.background=color}
+function clearAddForm(){$('suid').value='';$('sname').value='';$('sbal').value='0';$('scl').value='0'}
+function clearManualAddForm(){$('nuid').value='';$('nname').value='';$('nbal').value='0';$('ncl').value='0'}
+function startScanFor(type,inputId,statusId,focusId){setStatus(statusId,'Scanning...','#fff3cd');reqJson('/api/scan-mode?type='+type,{method:'POST'}).then(()=>{if(scanInterval)clearInterval(scanInterval);scanInterval=setInterval(()=>{reqJson('/api/last-scanned').then(d=>{if(d.uid&&d.uid.length>0){clearInterval(scanInterval);$(inputId).value=d.uid;if(type=='add'&&userExists(d.uid)){setStatus(statusId,'UID already exists','#f8d7da')}else{setStatus(statusId,'Card found!','#d4edda');if(focusId)$(focusId).focus()}reqJson('/api/clear-scanned',{method:'POST'})}}).catch(()=>{})},1000)}).catch(e=>setStatus(statusId,e.message,'#f8d7da'))}
+function addU(){var d={uid:$('nuid').value.trim(),name:$('nname').value.trim(),balance:+$('nbal').value,creditLimit:+$('ncl').value};if(!d.uid||!d.name){alert('Enter UID and Name');return}if(userExists(d.uid)){alert('User with this UID already exists');return}reqJson('/api/users',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).then(()=>{clearManualAddForm();hm('au');lu()}).catch(e=>alert(e.message))}
 function addM(){var d={key:$('mkey').value.toUpperCase(),name:$('mname').value,price:+$('mprice').value,stock:+$('mstock').value};fetch('/api/menu',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).then(()=>{hm('am');lm()})}
 function edU(i){var u=U[i];$('euid').value=u.uid;$('ename').value=u.name;$('ebal').value=u.balance;$('ecl').value=u.creditLimit;sm('eu')}
 function updU(){var d={name:$('ename').value,balance:+$('ebal').value,creditLimit:+$('ecl').value};fetch('/api/users/'+$('euid').value,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).then(()=>{hm('eu');lu()})}
 function delU(i){if(confirm('Delete '+U[i].name+'?'))fetch('/api/users/'+U[i].uid,{method:'DELETE'}).then(()=>lu())}
-function rch(i){var a=prompt('Recharge amount:');if(a)fetch('/api/users/'+U[i].uid+'/recharge',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:+a})}).then(()=>lu())}
 function edM(i){var s=prompt('New stock for '+M[i].name+':',M[i].stock);if(s!=null){var p=prompt('New price:',M[i].price);if(p!=null)fetch('/api/menu/'+M[i].key,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({stock:+s,price:+p})}).then(()=>lm())}}
 function delM(i){if(confirm('Delete '+M[i].name+'?'))fetch('/api/menu/'+M[i].key,{method:'DELETE'}).then(()=>lm())}
 function rdy(id){var ord=O.find(o=>o.id==id);fetch('/api/orders/'+id+'/ready',{method:'POST'}).then(()=>{lo();if('speechSynthesis'in window){var u=new SpeechSynthesisUtterance('Order ready for '+(ord?ord.userName:'customer'));speechSynthesis.speak(u)}})}
 function cnl(id){if(confirm('Cancel order?'))fetch('/api/orders/'+id+'/cancel',{method:'POST'}).then(()=>lo())}
 var scanInterval=null;
-function startScan(){$('scanStatus').textContent='Scanning...';$('scanStatus').style.background='#fff3cd';fetch('/api/scan-mode',{method:'POST'});if(scanInterval)clearInterval(scanInterval);scanInterval=setInterval(()=>{fetch('/api/last-scanned').then(r=>r.json()).then(d=>{if(d.uid&&d.uid.length>0){clearInterval(scanInterval);$('suid').value=d.uid;$('scanStatus').textContent='Card found!';$('scanStatus').style.background='#d4edda';$('sname').focus();fetch('/api/clear-scanned',{method:'POST'})}})},1000)}
-function addScanned(){var d={uid:$('suid').value,name:$('sname').value,balance:+$('sbal').value,creditLimit:+$('scl').value};if(!d.uid||!d.name){alert('Enter UID and Name');return}fetch('/api/users',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).then(()=>{$('suid').value='';$('sname').value='';$('sbal').value='0';$('scl').value='0';lu();$('scanStatus').textContent='Added!';$('scanStatus').style.background='#d4edda';setTimeout(()=>{$('scanStatus').textContent='Ready';$('scanStatus').style.background='#f0f0f0'},2000)})}
+function startScan(){startScanFor('add','suid','scanStatus','sname')}
+function startRechargeScan(){startScanFor('recharge','ruid','rechargeStatus','ramt')}
+function addScanned(){var d={uid:$('suid').value.trim(),name:$('sname').value.trim(),balance:+$('sbal').value,creditLimit:+$('scl').value};if(!d.uid||!d.name){alert('Enter UID and Name');return}if(userExists(d.uid)){setStatus('scanStatus','UID already exists','#f8d7da');alert('User with this UID already exists');return}reqJson('/api/users',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).then(()=>{clearAddForm();lu();setStatus('scanStatus','Added!','#d4edda');setTimeout(()=>setStatus('scanStatus','Ready','#f0f0f0'),2000)}).catch(e=>{setStatus('scanStatus',e.message,'#f8d7da');alert(e.message)})}
+function rechargeUser(){var uid=$('ruid').value.trim(),amount=+$('ramt').value;if(!uid){alert('Enter UID');return}if(!(amount>0)){alert('Enter valid recharge amount');return}reqJson('/api/users/'+encodeURIComponent(uid)+'/recharge',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:amount})}).then(d=>{var balance=typeof d.balance==='number'?d.balance.toFixed(0):amount.toFixed(0);$('ramt').value='';setStatus('rechargeStatus','Balance updated: Rs '+balance,'#d4edda');lu();ltx();lsr()}).catch(e=>{setStatus('rechargeStatus',e.message,'#f8d7da');alert(e.message)})}
 function sc(){startScan()}
 function dl(n,t,c){var a=document.createElement('a');a.href='data:text/'+c+';charset=utf-8,'+encodeURIComponent(t);a.download=n;a.click()}
 function dlU(f){if(!U.length)return alert('No users');var t='';if(f=='csv'){t='UID,Name,Balance,CreditUsed,CreditLimit\n';U.forEach(u=>t+=u.uid+','+u.name+','+u.balance+','+u.creditUsed+','+u.creditLimit+'\n');dl('users.csv',t,'csv')}else{t='SMART CANTEEN - USERS\n'+new Date().toLocaleString()+'\n\n';U.forEach(u=>t+='UID: '+u.uid+'\nName: '+u.name+'\nBalance: Rs '+u.balance+'\nCredit Used: Rs '+u.creditUsed+'\nCredit Limit: Rs '+u.creditLimit+'\n---\n');dl('users.txt',t,'plain')}}
@@ -285,9 +292,12 @@ void handleGetInventoryReport();
 void handleGetUserActivityReport();
 void addTransaction(int orderId, const char* uid, const char* name, float amount, const char* type);
 void getCurrentTimeStr(char* buffer);
+void sendBalanceUpdate(const User& user);
 
 // Last scanned UID for web interface
 char lastScannedUID[20] = "";
+enum WebScanMode { SCAN_NONE, SCAN_ADD_USER, SCAN_RECHARGE_USER };
+WebScanMode webScanMode = SCAN_NONE;
 
 void setup() {
   Serial.begin(9600);
@@ -505,13 +515,40 @@ void handleAddUser() {
   }
   
   DynamicJsonDocument doc(512);
-  deserializeJson(doc, server.arg("plain"));
+  if (deserializeJson(doc, server.arg("plain"))) {
+    server.send(400, "application/json", "{\"error\":\"Invalid request\"}");
+    return;
+  }
   
-  strncpy(users[userCount].uid, doc["uid"] | "", 19);
-  strncpy(users[userCount].name, doc["name"] | "", 19);
-  users[userCount].balance = doc["balance"] | 0.0;
+  String uid = doc["uid"] | "";
+  String name = doc["name"] | "";
+  uid.trim();
+  name.trim();
+  
+  if (!uid.length() || !name.length()) {
+    server.send(400, "application/json", "{\"error\":\"UID and name are required\"}");
+    return;
+  }
+  
+  for (int i = 0; i < userCount; i++) {
+    if (strcmp(users[i].uid, uid.c_str()) == 0) {
+      server.send(409, "application/json", "{\"error\":\"User with this UID already exists\"}");
+      return;
+    }
+  }
+  
+  float balance = doc["balance"] | 0.0;
+  float creditLimit = doc["creditLimit"] | 0.0;
+  if (balance < 0) balance = 0;
+  if (creditLimit < 0) creditLimit = 0;
+  
+  strncpy(users[userCount].uid, uid.c_str(), 19);
+  users[userCount].uid[19] = '\0';
+  strncpy(users[userCount].name, name.c_str(), 19);
+  users[userCount].name[19] = '\0';
+  users[userCount].balance = balance;
   users[userCount].creditUsed = 0;
-  users[userCount].creditLimit = doc["creditLimit"] | 0.0;
+  users[userCount].creditLimit = creditLimit;
   users[userCount].active = true;
   userCount++;
   
@@ -530,13 +567,37 @@ void handleUpdateUser() {
   }
   
   DynamicJsonDocument doc(512);
-  deserializeJson(doc, server.arg("plain"));
+  if (deserializeJson(doc, server.arg("plain"))) {
+    server.send(400, "application/json", "{\"error\":\"Invalid request\"}");
+    return;
+  }
   
-  if (doc.containsKey("name")) strncpy(users[idx].name, doc["name"], 19);
-  if (doc.containsKey("balance")) users[idx].balance = doc["balance"];
-  if (doc.containsKey("creditUsed")) users[idx].creditUsed = doc["creditUsed"];
-  if (doc.containsKey("creditLimit")) users[idx].creditLimit = doc["creditLimit"];
+  bool balanceChanged = false;
   
+  if (doc.containsKey("name")) {
+    String name = doc["name"] | "";
+    name.trim();
+    if (!name.length()) {
+      server.send(400, "application/json", "{\"error\":\"Name is required\"}");
+      return;
+    }
+    strncpy(users[idx].name, name.c_str(), 19);
+    users[idx].name[19] = '\0';
+  }
+  if (doc.containsKey("balance")) {
+    users[idx].balance = doc["balance"];
+    balanceChanged = true;
+  }
+  if (doc.containsKey("creditUsed")) {
+    users[idx].creditUsed = doc["creditUsed"];
+    balanceChanged = true;
+  }
+  if (doc.containsKey("creditLimit")) {
+    users[idx].creditLimit = doc["creditLimit"];
+    balanceChanged = true;
+  }
+  
+  if (balanceChanged) sendBalanceUpdate(users[idx]);
   saveData();
   server.send(200, "application/json", "{\"success\":true}");
 }
@@ -565,16 +626,32 @@ void handleRechargeUser() {
   }
   
   DynamicJsonDocument doc(256);
-  deserializeJson(doc, server.arg("plain"));
+  if (deserializeJson(doc, server.arg("plain"))) {
+    server.send(400, "application/json", "{\"error\":\"Invalid request\"}");
+    return;
+  }
   
   float amount = doc["amount"] | 0.0;
+  if (amount <= 0) {
+    server.send(400, "application/json", "{\"error\":\"Recharge amount must be greater than zero\"}");
+    return;
+  }
   users[idx].balance += amount;
+  sendBalanceUpdate(users[idx]);
   
   // Record recharge transaction
   addTransaction(0, users[idx].uid, users[idx].name, amount, "recharge");
   
   saveData();
-  server.send(200, "application/json", "{\"success\":true}");
+  DynamicJsonDocument responseDoc(256);
+  responseDoc["success"] = true;
+  responseDoc["uid"] = users[idx].uid;
+  responseDoc["balance"] = users[idx].balance;
+  responseDoc["creditUsed"] = users[idx].creditUsed;
+  responseDoc["creditLimit"] = users[idx].creditLimit;
+  String response;
+  serializeJson(responseDoc, response);
+  server.send(200, "application/json", response);
 }
 
 void handleGetMenu() {
@@ -747,6 +824,8 @@ void handleOrderCancel() {
         }
       }
       
+      if (userIdx >= 0) sendBalanceUpdate(users[userIdx]);
+
       Serial.print("ORDER_STATUS,");
       Serial.print(orders[i].uid);
       Serial.println(",CANCELLED");
@@ -760,6 +839,9 @@ void handleOrderCancel() {
 }
 
 void handleScanMode() {
+  lastScannedUID[0] = '\0';
+  String scanType = server.arg("type");
+  webScanMode = (scanType == "recharge") ? SCAN_RECHARGE_USER : SCAN_ADD_USER;
   Serial.println("RECHARGE_MODE");
   server.send(200, "application/json", "{\"success\":true}");
 }
@@ -773,6 +855,7 @@ void handleLastScanned() {
 
 void handleClearScanned() {
   lastScannedUID[0] = '\0';
+  webScanMode = SCAN_NONE;
   server.send(200, "application/json", "{\"success\":true}");
 }
 
@@ -906,6 +989,17 @@ void addTransaction(int orderId, const char* uid, const char* name, float amount
   tx.timestamp = millis();
   tx.active = true;
   transactionCount++;
+}
+
+void sendBalanceUpdate(const User& user) {
+  Serial.print("BAL_UPDATE,");
+  Serial.print(user.uid);
+  Serial.print(",");
+  Serial.print(user.balance, 2);
+  Serial.print(",");
+  Serial.print(user.creditUsed, 2);
+  Serial.print(",");
+  Serial.println(user.creditLimit, 2);
 }
 
 void handleGetTransactions() {
@@ -1080,6 +1174,12 @@ void processSerialData() {
       
       if (buffer.startsWith("UID:")) {
         String uid = buffer.substring(4);
+        uid.trim();
+
+        if (webScanMode != SCAN_NONE) {
+          uid.toCharArray(lastScannedUID, sizeof(lastScannedUID));
+          webScanMode = SCAN_NONE;
+        }
         
         if (inOrder) {
           uid.toCharArray(orderUID.begin(), 20);

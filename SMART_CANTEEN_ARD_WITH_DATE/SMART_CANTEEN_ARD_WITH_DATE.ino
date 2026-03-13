@@ -64,9 +64,9 @@ uint8_t cartCount = 0;
 // User Session Variables
 char userName[11] = "";
 char userUID[12] = "";
-uint16_t userBalance = 0;      // In cents/paise
-uint16_t userCreditUsed = 0;
-uint16_t userCreditLimit = 0;
+uint32_t userBalance = 0;      // In cents/paise
+uint32_t userCreditUsed = 0;
+uint32_t userCreditLimit = 0;
 
 // Flags packed into single byte
 uint8_t flags = 0;
@@ -290,11 +290,11 @@ void parseUserData(String &data) {
   String name = data.substring(idx1 + 1, idx2);
   name.toCharArray(userName, sizeof(userName));
   
-  userBalance = (uint16_t)(data.substring(idx2 + 1, idx3 > 0 ? idx3 : data.length()).toFloat() * 100);
+  userBalance = (uint32_t)(data.substring(idx2 + 1, idx3 > 0 ? idx3 : data.length()).toFloat() * 100);
   
   if (idx3 > 0 && idx4 > 0) {
-    userCreditUsed = (uint16_t)(data.substring(idx3 + 1, idx4).toFloat() * 100);
-    userCreditLimit = (uint16_t)(data.substring(idx4 + 1).toFloat() * 100);
+    userCreditUsed = (uint32_t)(data.substring(idx3 + 1, idx4).toFloat() * 100);
+    userCreditLimit = (uint32_t)(data.substring(idx4 + 1).toFloat() * 100);
   } else {
     userCreditUsed = 0;
     userCreditLimit = 0;
@@ -597,6 +597,45 @@ uint32_t availableSpend() {
   return (uint32_t)userBalance + (userCreditLimit - userCreditUsed);
 }
 
+bool refreshCurrentUserData() {
+  if (!sessionActive || userUID[0] == '\0') return false;
+
+  Serial.print(F("UID:"));
+  Serial.println(userUID);
+
+  unsigned long startTime = millis();
+  while (millis() - startTime < 1800) {
+    if (!Serial.available()) continue;
+
+    String response = Serial.readStringUntil('\n');
+    response.trim();
+
+    if (response.startsWith(F("VALID,"))) {
+      parseUserData(response);
+      return true;
+    }
+
+    if (response.startsWith(F("BAL_UPDATE,"))) {
+      int idx1 = response.indexOf(',');
+      int idx2 = response.indexOf(',', idx1 + 1);
+      int idx3 = response.indexOf(',', idx2 + 1);
+      int idx4 = response.indexOf(',', idx3 + 1);
+
+      if (idx1 > 0 && idx2 > idx1 && idx3 > idx2 && idx4 > idx3) {
+        String uid = response.substring(idx1 + 1, idx2);
+        if (uid.equals(userUID)) {
+          userBalance = (uint32_t)(response.substring(idx2 + 1, idx3).toFloat() * 100);
+          userCreditUsed = (uint32_t)(response.substring(idx3 + 1, idx4).toFloat() * 100);
+          userCreditLimit = (uint32_t)(response.substring(idx4 + 1).toFloat() * 100);
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
 void showCartTotal() {
   lcd.clear();
   lcd.print(F("Cart Total:"));
@@ -608,6 +647,9 @@ void showCartTotal() {
 }
 
 void showBalance() {
+  // Pull latest balance from ESP so keypad view does not show stale cached values.
+  refreshCurrentUserData();
+
   lcd.clear();
   lcd.print(F("Bal:Rs"));
   lcd.print(userBalance / 100);
@@ -905,8 +947,8 @@ void placeOrder(uint32_t total) {
   lcd.clear();
   lcd.print(F("Placing Order..."));
   
-  uint16_t walletPortion = (userBalance >= total) ? total : userBalance;
-  uint16_t creditPortion = total - walletPortion;
+  uint32_t walletPortion = (userBalance >= total) ? total : userBalance;
+  uint32_t creditPortion = total - walletPortion;
   
   Serial.println(F("ORDER_START"));
   Serial.print(F("UID:"));
@@ -1013,6 +1055,20 @@ void pollSerialNotifications() {
     lcd.setCursor(0, 1);
     lcd.print(F("Scan Card..."));
     beepDouble();
+  } else if (line.startsWith(F("BAL_UPDATE,"))) {
+    int idx1 = line.indexOf(',');
+    int idx2 = line.indexOf(',', idx1 + 1);
+    int idx3 = line.indexOf(',', idx2 + 1);
+    int idx4 = line.indexOf(',', idx3 + 1);
+
+    if (idx1 > 0 && idx2 > idx1 && idx3 > idx2 && idx4 > idx3) {
+      String uid = line.substring(idx1 + 1, idx2);
+      if (uid.equals(userUID)) {
+        userBalance = (uint32_t)(line.substring(idx2 + 1, idx3).toFloat() * 100);
+        userCreditUsed = (uint32_t)(line.substring(idx3 + 1, idx4).toFloat() * 100);
+        userCreditLimit = (uint32_t)(line.substring(idx4 + 1).toFloat() * 100);
+      }
+    }
   } else if (line.startsWith(F("ORDER_STATUS,"))) {
     int idx1 = line.indexOf(',');
     int idx2 = line.indexOf(',', idx1 + 1);

@@ -84,6 +84,18 @@
             <span id="scanStatus" style="margin-left:10px;padding:6px 12px;border-radius:6px;background:#f0f0f0;font-size:13px">Ready</span>
           </div>
         </div>
+
+        <div style="background:#fff;padding:20px;border-radius:12px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.15)">
+          <h3 style="color:#56ab2f;margin:0 0 16px 0">&#128176; Recharge Existing User (Scan Card)</h3>
+          <input id="ruid" placeholder="Scanned Card UID" readonly style="margin-bottom:10px;padding:12px;font-size:15px;background:#f8f9fa">
+          <input id="ramt" placeholder="Recharge Amount (Rs)" type="number" min="1" style="margin-bottom:16px;padding:12px;font-size:15px">
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="b bp" onclick="startRechargeScan()" style="padding:10px 24px">&#128179; Scan Card For Recharge</button>
+            <button class="b bg" onclick="rechargeScanned()" style="padding:10px 24px">+&#8377; Recharge Scanned Card</button>
+            <span id="rechargeScanStatus" style="padding:6px 12px;border-radius:6px;background:#f0f0f0;font-size:13px">Ready</span>
+          </div>
+        </div>
+
         <button class="b bg" onclick="sm('au')">+ Add Manually</button>
         <button class="b bb" onclick="dlU('csv')">&#128196; CSV</button>
         <button class="b bk" onclick="dlU('txt')">&#128196; TXT</button>
