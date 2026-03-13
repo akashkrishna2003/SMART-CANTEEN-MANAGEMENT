@@ -1,6 +1,6 @@
 /*
- * Smart Canteen Management System - Arduino Controller
- * Optimized for low RAM usage on Arduino Uno/Nano
+ * smart canteen management with iot enabled system 
+ includes rfid,lcd i2c,4x4 keypad,esp01,atmega328p,
  */
 
 #include <Wire.h>
@@ -43,7 +43,7 @@ Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 struct MenuItem {
   char key[3];
   char name[11];
-  uint16_t price;  // Price in cents/paise
+  uint16_t price;  // changed to 
   uint8_t stock;
 };
 
@@ -64,7 +64,7 @@ uint8_t cartCount = 0;
 // User Session Variables
 char userName[11] = "";
 char userUID[12] = "";
-uint32_t userBalance = 0;      // In cents/paise
+uint32_t userBalance = 0;      // changed to 32 t fix balance typo
 uint32_t userCreditUsed = 0;
 uint32_t userCreditLimit = 0;
 
